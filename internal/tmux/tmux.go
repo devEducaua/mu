@@ -18,12 +18,13 @@ func GoToSession(session string) error {
 func SessionIsRunning(session string) (bool, error) {
 
 	output, err := utils.RunTmuxCommandWithOutput("list-sessions");
-	if err != nil {
-		return false, err;
-	}
 
 	if strings.HasPrefix(string(output), "no server running on ") {
 		return false, nil;
+	}
+
+	if err != nil {
+		return false, err;
 	}
 
 	for l := range strings.SplitSeq(string(output), "\n") {

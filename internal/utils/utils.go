@@ -43,7 +43,6 @@ func RunTmuxCommandWithOutput(args ...string) (string, error) {
 	if err != nil {
 		return string(bt), err;
 	}
-
 	return string(bt), nil;
 }
 
@@ -56,6 +55,7 @@ func RunExternalCommand(bin string, args ...string) error {
 	cmd.Stdout = os.Stdout;
 	cmd.Stderr = os.Stderr;
 	cmd.Stdin = os.Stdin;
+
 	if err := cmd.Run(); err != nil {
 		return err;
 	}
