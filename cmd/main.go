@@ -1,10 +1,11 @@
 package main
 
 import (
-	"errors"
-	"fmt"
 	"os"
+	"fmt"
+	"errors"
 	"muxt/internal/commands"
+	"muxt/internal/config"
 )
 
 func main() {
@@ -16,11 +17,14 @@ func main() {
 }
 
 func handleCommandLineArgs(argv []string) error {
-	if len(argv) < 1 {
-		return nil;
+	conf, err := config.GetConfig();
+	if err != nil {
+		return err;
 	}
-	
-	command := argv[0];
+	command := conf.DefaultCommand;
+	if len(argv) > 0 {
+		command = argv[0];
+	}
 
 	switch command {
 	case "new", "nw":

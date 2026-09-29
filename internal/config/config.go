@@ -8,6 +8,7 @@ import (
 
 type Config struct {
 	BaseIndex int `kdl:"base-index"`
+	DefaultCommand string `kdl:"default-command"`
 }
 
 func GetConfig() (Config, error) {
@@ -28,6 +29,10 @@ func GetConfig() (Config, error) {
 
 	if fileConfig.BaseIndex != 0 {
 		config.BaseIndex = fileConfig.BaseIndex;
+	}
+	if fileConfig.DefaultCommand != "" {
+
+		config.DefaultCommand = fileConfig.DefaultCommand;
 	}
 
 	return config, nil;
