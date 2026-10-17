@@ -11,6 +11,27 @@ type Config struct {
 	DefaultCommand string `kdl:"default-command"`
 }
 
+const defaultBaseFile = `layout "%v" {
+}
+`
+
+func GetBaseFile() (string, error) {
+	base, err := GetBaseDir();
+	if err != nil {
+		return "", err;
+	}
+
+	path := filepath.Join(base, "base.kdl");
+	dt, err := os.ReadFile(path);
+	if err != nil {
+		if os.IsNotExist(err) {
+			return defaultBaseFile, nil;
+		}
+		return "", err;
+	}
+	return string(dt), nil;
+}
+
 func GetConfig() (Config, error) {
 	base, err := GetBaseDir();
 	if err != nil {
@@ -69,7 +90,6 @@ func GetBaseDir() (string, error) {
 	if err := os.MkdirAll(path, 0755); err != nil {
 		return "", err;
 	}
-
 	return path, nil;
 }
 
