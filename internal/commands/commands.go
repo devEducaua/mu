@@ -109,55 +109,8 @@ func Start(name string) error {
 	return nil;
 }
 
-func Copy(from, to string) error {
-	dir, err := config.GetLayoutsDir();
-	if err != nil {
-		return err;
-	}
-
-	dirs, err := os.ReadDir(dir);
-	if err != nil {
-		return err;
-	}
-
-	fromExists := false;
-	toExists := false;
-	for _,e := range dirs {
-		switch e.Name() {
-		case from+".kdl":
-			fromExists = true;
-		case to+".kdl":
-			toExists = true;
-		}
-	}
-
-	if !fromExists {
-		return errors.New("cannot copy a layout that doesn't exists");
-	}
-	if toExists {
-		return errors.New("cannot copy to a layout that already exists");
-	}
-
-	fromPath := filepath.Join(dir, from+".kdl");
-
-	dat, err := os.ReadFile(fromPath);
-	if err != nil {
-		return err;
-	}
-
-	toPath := filepath.Join(dir, to+".kdl");
-	f, err := os.OpenFile(toPath, os.O_CREATE|os.O_WRONLY, 0655);
-	if err != nil {
-		return err;
-	}
-	defer f.Close();
-	f.Write(dat);
-
-	if err := utils.OpenEditor(toPath); err != nil {
-		return err;
-	}
-
-	return nil;
+func Attach(name string) error {
+	return tmux.GoToSession(name);
 }
 
 func List() error {
