@@ -1,5 +1,5 @@
 
-TARGET = muxt
+TARGET = mu
 TARGETDIR = build
 SRCS = $(shell fd -e .go)
 

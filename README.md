@@ -1,5 +1,5 @@
 
-# muxt
+# mu
 
 a tool to provide a declarative tmux experience.
 
@@ -23,31 +23,31 @@ make install # it needs root
 
 first you need to create a layout, you can it with:
 ```sh
-muxt new <layout-name>
+mu new <layout-name>
 ```
-this will create a new file inside $XDG_CONFIG_HOME/muxt/layouts called `<layout-name>.kdl`.
+this will create a new file inside $XDG_CONFIG_HOME/mu/layouts called `<layout-name>.kdl`.
 a base start template will be write to the file.
 
 you can edit this layout later with:
 ```sh
-muxt edit <layout-name>
+mu edit <layout-name>
 ```
 
 finally, to run the layout and create a session with it, use:
 ```sh
-muxt start <layout-name>
+mu start <layout-name>
 ```
 
 you can copy already existing layouts:
 ```sh
-muxt copy <layout-name> <layout-name2>
+mu copy <layout-name> <layout-name2>
 ```
 
 you list layouts with:
 ```sh
-muxt list
+mu list
 ```
 
 ### writing layouts
-muxt uses the [kdl language](https://kdl.dev) to declare the layouts. see the [examples directory](./examples) for more.
+mu uses the [kdl language](https://kdl.dev) to declare the layouts. see the [examples directory](./examples) for more.
 

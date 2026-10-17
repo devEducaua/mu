@@ -1,10 +1,10 @@
 // INFO: this is a example layout
 // layout just receives a name as a argument, this is <name> you are going to use in the cli, like:
-// `muxt start <name>` and `muxt edit <name>`.
-// in this case: `muxt start app`.
+// `mu start <name>`.
+// in this case: `mu start app`.
 layout "app" {
     // root is the start directory of the session.
-    root "~/projectsj/my-app"
+    root "~/projects/my-app"
 
     // for each window that you want call a window block with it's name.
     // inside window you declare your panes.

@@ -65,7 +65,7 @@ func GetBaseDir() (string, error) {
 		}
 		xdg = filepath.Join(home, ".config");
 	}
-	path := filepath.Join(xdg, "muxt")
+	path := filepath.Join(xdg, "mu")
 	if err := os.MkdirAll(path, 0755); err != nil {
 		return "", err;
 	}

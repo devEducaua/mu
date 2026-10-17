@@ -4,8 +4,8 @@ import (
 	"os"
 	"fmt"
 	"errors"
-	"muxt/internal/commands"
-	"muxt/internal/config"
+	"mu/internal/commands"
+	"mu/internal/config"
 )
 
 func main() {
