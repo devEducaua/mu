@@ -25,12 +25,12 @@ first you need to create a layout, you can it with:
 ```sh
 mu new <layout-name>
 ```
-this will create a new file inside $XDG_CONFIG_HOME/mu/layouts called `<layout-name>.kdl`.
-a base start template will be write to the file.
+this will create a new file inside $XDG_CONFIG_HOME/mu/layouts called `<layout-name>.kdl`. or if it already exists, i will just open.
+a base start template will be write to the file. this base is defined in $XDG_CONFIG_HOME/mu/base.kdl.
 
-you can edit this layout later with:
+you can use edit to open the layouts dir in your $EDITOR.
 ```sh
-mu edit <layout-name>
+mu edit
 ```
 
 finally, to run the layout and create a session with it, use:
@@ -38,9 +38,10 @@ finally, to run the layout and create a session with it, use:
 mu start <layout-name>
 ```
 
-you can copy already existing layouts:
+you can attach just like in normal tmux
 ```sh
-mu copy <layout-name> <layout-name2>
+mu attach 
+mu attach <layout-name>
 ```
 
 you list layouts with:
