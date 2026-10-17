@@ -2,17 +2,20 @@ package tmux
 
 import (
 	"fmt"
-	"muxt/internal/utils"
+	"mu/internal/utils"
 	"os"
 	"strings"
 )
 
 func GoToSession(session string) error {
 	env := os.Getenv("TMUX");
+
+	cmd := "-t"
+	if session == "" { cmd = ""; }
 	if env != "" {
-		return utils.RunTmuxCommand("switch-client", "-t", session);
+		return utils.RunTmuxCommand("switch-client", cmd, session);
 	}
-	 return utils.RunTmuxCommand("attach-session", "-t", session);
+	 return utils.RunTmuxCommand("attach-session", cmd, session);
 }
 
 func SessionIsRunning(session string) (bool, error) {

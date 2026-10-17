@@ -2,8 +2,8 @@ package tmux
 
 import (
 	"fmt"
-	"muxt/internal/config"
-	"muxt/internal/utils"
+	"mu/internal/config"
+	"mu/internal/utils"
 	"os"
 )
 
