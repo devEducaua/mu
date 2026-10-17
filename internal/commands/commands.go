@@ -49,22 +49,12 @@ func New(name string) error {
     return nil;
 }
 
-func Edit(name string) error {
+func Edit() error {
 	layoutsDir, err := config.GetLayoutsDir();
 	if err != nil {
 		return err;
 	}
-	fileName := name+".kdl";
-	exists, err := utils.FileExistsInDir(fileName, layoutsDir);
-	if err != nil {
-		return err;
-	}
-	if !exists {
-		return fmt.Errorf("layout: `%v` doesn't exists", name);
-	}
-
-	path := filepath.Join(layoutsDir, fileName);
-	err = utils.OpenEditor(path);
+	err = utils.OpenEditor(layoutsDir);
 	if err != nil {
 		return err;
 	}
