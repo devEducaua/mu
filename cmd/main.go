@@ -27,21 +27,14 @@ func handleCommandLineArgs(argv []string) error {
 	}
 
 	switch command {
-	case "new", "nw":
+	case "new", "nw", "n":
         if len(argv) < 2 {
             return errors.New("command: `new` expects argument for layout name");
         }
         name := argv[1];
-        err := commands.New(name);
-        if err != nil {
-            return err;
-        }
-	case "edit", "ed":
-        if len(argv) < 2 {
-            return errors.New("command: `edit` expects argument for layout name");
-        }
-        name := argv[1];
-        err := commands.Edit(name);
+        err = commands.New(name);
+	case "edit", "ed", "e":
+        err := commands.Edit();
         if err != nil {
             return err;
         }
@@ -50,28 +43,20 @@ func handleCommandLineArgs(argv []string) error {
             return errors.New("command: `start` expects argument for layout name");
         }
         name := argv[1];
-        err := commands.Start(name);
-        if err != nil {
-            return err;
+        err = commands.Start(name);
+	case "attach", "at", "a":
+		var name string;
+        if len(argv) >= 2 {
+			name = argv[1];
         }
-	case "copy", "cp":
-		if len(argv) < 3 {
-			return errors.New("command: `copy` expects two arguments: <from> and <to>");
-		}
-        from := argv[1];
-        to := argv[2];
-        err := commands.Copy(from, to);
-        if err != nil {
-            return err;
-        }
+		err = commands.Attach(name);
 	case "list", "ls":
-        err := commands.List();
-        if err != nil {
-            return err;
-        }
-
+        err = commands.List();
 	default:
 		return fmt.Errorf("unknown command: `%v`", command);
+	}
+	if err != nil {
+		return err;
 	}
 	
 	return nil;
