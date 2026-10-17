@@ -1,10 +1,12 @@
 
 TARGET = mu
 TARGETDIR = build
+MANPAGE = $(TARGET).1
 SRCS = $(shell fd -e .go)
 
 PREFIX ?= /usr/local
 BINDIR = $(PREFIX)/bin
+MANDIR = $(PREFIX)/share/man/man1
 
 .PHONY: install clean
 
@@ -16,9 +18,12 @@ $(TARGETDIR)/$(TARGET): $(SRCS)
 
 install:
 	cp $(TARGETDIR)/$(TARGET) $(BINDIR)/
+	cp $(MANPAGE) $(MANDIR)/
+	gzip -f $(MANDIR)/$(MANPAGE)
 
 uninstall:
-	rm $(BINDIR)/$(TARGET) 
+	rm -f $(BINDIR)/$(TARGET) 
+	rm -f $(MANDIR)/$(MANPAGE) 
 
 clean:
 	rm -r $(TARGETDIR)
