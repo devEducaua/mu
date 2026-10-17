@@ -1,0 +1,39 @@
+.TH MQ 1 "October 2026" "mu 1.0" "User Commands"
+
+.SH NAME
+mu \- a declarative tmux experience
+.SH SYNOPSIS
+mq <command> [<argument>]
+
+.SH DESCRIPTION
+mu is a simple tool to provide a more declarative tmux experience.
+
+.SH COMMANDS
+
+.TP
+.B new, nw, n NAME
+create a new layout with NAME or edit a already existed one.
+
+.TP
+.B edit, ed, e
+open the layouts directory with $EDITOR.
+
+.TP 
+.B attach, at, a [NAME]
+attach to last session opened if no NAME is provided, else attach to the provided session.
+
+.TP 
+.B start, st, s [NAME]
+start a new session based on layout NAME, if it is already running, just attach.
+
+.SH FILES
+.TP
+.I ~/.config/mu/config.kdl
+configuration file.
+.TP
+.I ~/.config/mu/base.kdl
+base layout file.
+.TP
+.I ~/.config/mu/layouts/*.kdl
+each layout file.
+
