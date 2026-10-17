@@ -1,51 +1,46 @@
 package commands
 
 import (
-	"errors"
 	"fmt"
-	"muxt/internal/config"
-	"muxt/internal/tmux"
-	"muxt/internal/utils"
+	"mu/internal/config"
+	"mu/internal/tmux"
+	"mu/internal/utils"
 	"os"
 	"path/filepath"
 	"strings"
 )
 
 func New(name string) error {
-	layoutsDir, err := config.GetLayoutsDir();
+	baseDir, err := config.GetBaseDir();
 	if err != nil {
 		return err;
 	}
+
+	layoutsDir := filepath.Join(baseDir, "layouts/");
+
 	fileName := name+".kdl";
 	exists, err := utils.FileExistsInDir(fileName, layoutsDir);
 	if err != nil {
 		return err;
 	}
-	if exists {
-		return fmt.Errorf("layout: `%v` already exists, if you want to open it, run `muxt edit %v`", name, name);
-	}
 
 	layoutPath := filepath.Join(layoutsDir, name+".kdl");
+	if !exists {
 
-	// TODO: maybe turn this is a path, a separated file.
-	// TODO: add comments in the example base file.
-	baseNewLayout := `
-layout %v {
-	root ~/
+		cont, err := config.GetBaseFile();
+		if err != nil {
+			return err;
+		}
 
-	window {
-		pane "$EDITOR" 
+		baseNewLayout := fmt.Sprintf(cont, name);
+
+		f, err := os.OpenFile(layoutPath, os.O_CREATE|os.O_EXCL|os.O_APPEND|os.O_RDWR, 0666);
+		if err != nil {
+			return err;
+		}
+		defer f.Close();
+		f.WriteString(baseNewLayout);
 	}
-}
-	`
-
-	f, err := os.OpenFile(layoutPath, os.O_CREATE|os.O_EXCL|os.O_APPEND|os.O_RDWR, 0666);
-	if err != nil {
-		return err;
-	}
-	defer f.Close();
-	f.WriteString(baseNewLayout);
-
 	err = utils.OpenEditor(layoutPath);
 	if err != nil {
 		return fmt.Errorf("could not open $EDITOR: %v: but base was wrote to `%v`\n", err, layoutPath);
