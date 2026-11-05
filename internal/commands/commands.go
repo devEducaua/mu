@@ -26,13 +26,11 @@ func New(name string) error {
 
 	layoutPath := filepath.Join(layoutsDir, name+".kdl");
 	if !exists {
-
 		cont, err := config.GetBaseFile();
 		if err != nil {
 			return err;
 		}
-
-		baseNewLayout := fmt.Sprintf(cont, name);
+		baseNewLayout := strings.ReplaceAll(cont, "%v", name);
 
 		f, err := os.OpenFile(layoutPath, os.O_CREATE|os.O_EXCL|os.O_APPEND|os.O_RDWR, 0666);
 		if err != nil {
