@@ -10,12 +10,18 @@ import (
 func GoToSession(session string) error {
 	env := os.Getenv("TMUX");
 
-	cmd := "-t"
-	if session == "" { cmd = ""; }
-	if env != "" {
-		return utils.RunTmuxCommand("switch-client", cmd, session);
+	if env != "" && session != "" {
+		return utils.RunTmuxCommand("switch-client", "-t", session);
 	}
-	 return utils.RunTmuxCommand("attach-session", cmd, session);
+	if session == "" {
+		return utils.RunTmuxCommand("attach-session");
+	}
+
+	if session == "" && env != "" {
+		return fmt.Errorf("could not switch-client without the session name");
+	}
+
+	return utils.RunTmuxCommand("attach-session", "-t", session);
 }
 
 func SessionIsRunning(session string) (bool, error) {
