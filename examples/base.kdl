@@ -1,3 +1,16 @@
 
+// %v will be replaced by the layout name.
 layout "%v" {
+    root "~/prj/%v"
+    window "vi" {
+        pane "$EDITOR ."
+    }
+    window "cf" {
+        pane root="~/.config/%v" "$EDITOR ."
+    }
+    window "sh" {
+    }
+    window "no" {
+        pane root="~/not/prj/%v" "$EDITOR ."
+    }
 }
