@@ -11,20 +11,24 @@ mu is a simple tool to provide a more declarative tmux experience.
 .SH COMMANDS
 
 .TP
-.B new, nw, n NAME
+.B --new, -n
 create a new layout with NAME or edit a already existed one.
 
 .TP
-.B edit, ed, e
+.B --edit, -e
 open the layouts directory with $EDITOR.
 
-.TP 
-.B attach, at, a [NAME]
+.TP
+.B --attach, -a [NAME]
 attach to last session opened if no NAME is provided, else attach to the provided session.
 
 .TP 
-.B start, st, s [NAME]
+.B --start, -s [NAME]
 start a new session based on layout NAME, if it is already running, just attach.
+
+.TP
+-B --list, -l
+list layouts.
 
 .SH FILES
 .TP

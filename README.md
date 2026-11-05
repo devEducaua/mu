@@ -23,7 +23,7 @@ make install # it needs root
 
 first you need to create a layout, you can it with:
 ```sh
-mu new <layout-name>
+mu -n <layout-name>
 ```
 this will create a new file inside $XDG_CONFIG_HOME/mu/layouts called `<layout-name>.kdl`. or if it already exists, i will just open.
 a base start template will be write to the file. this base is defined in $XDG_CONFIG_HOME/mu/base.kdl.
@@ -35,18 +35,18 @@ mu edit
 
 finally, to run the layout and create a session with it, use:
 ```sh
-mu start <layout-name>
+mu -s <layout-name>
 ```
 
 you can attach just like in normal tmux
 ```sh
-mu attach 
-mu attach <layout-name>
+mu -a 
+mu -a <layout-name>
 ```
 
 you list layouts with:
 ```sh
-mu list
+mu -l
 ```
 
 ### writing layouts

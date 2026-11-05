@@ -27,30 +27,30 @@ func handleCommandLineArgs(argv []string) error {
 	}
 
 	switch command {
-	case "new", "nw", "n":
+	case "--new", "-n":
         if len(argv) < 2 {
             return errors.New("command: `new` expects argument for layout name");
         }
         name := argv[1];
         err = commands.New(name);
-	case "edit", "ed", "e":
+	case "--edit", "-e":
         err := commands.Edit();
         if err != nil {
             return err;
         }
-	case "start", "st":
+	case "--start", "-s":
         if len(argv) < 2 {
             return errors.New("command: `start` expects argument for layout name");
         }
         name := argv[1];
         err = commands.Start(name);
-	case "attach", "at", "a":
-		var name string;
+	case "--attach", "-a":
+		var name string = "";
         if len(argv) >= 2 {
 			name = argv[1];
         }
 		err = commands.Attach(name);
-	case "list", "ls":
+	case "--list", "-l":
         err = commands.List();
 	default:
 		return fmt.Errorf("unknown command: `%v`", command);
